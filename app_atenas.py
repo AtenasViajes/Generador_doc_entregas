@@ -204,7 +204,7 @@ with st.form("generador", clear_on_submit=False):
     # En móviles, col_input1 y col_input2 se pondrán automáticamente una debajo de la otra
     col_input1, col_input2 = st.columns(2)
     with col_input1:
-        nombre = st.text_input("Nombre completo del Titular")
+        nombre = st.text_input("Nombre completo del pasajero")
     with col_input2:
         fecha_hoy = st.date_input("Fecha de emisión", date.today())
     
@@ -250,4 +250,5 @@ if submitted:
         except Exception as e:
             st.error(f"Hubo un error al generar el PDF: {e}")
     else:
+
         st.warning("⚠️ Por favor ingresa el nombre del titular y selecciona al menos un servicio.")
