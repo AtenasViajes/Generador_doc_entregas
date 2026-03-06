@@ -45,7 +45,8 @@ def generar_pdf(nombre_cliente, items_seleccionados, fecha):
         "Declaro tener conocimiento de que el itinerario final (tanto en sus segmentos aereos como terrestres) "
         "puede estar sujeto a modificaciones por causas ajenas a la agencia Atenas, tales como condiciones climaticas, "
         "disposiciones gubernamentales, retrasos operativos de transportistas o situaciones de fuerza mayor. "
-        "Acepto los terminos de servicio y la gestion de la agencia ante dichas eventualidades."
+        "Acepto los terminos de servicio y la gestion de la agencia ante dichas eventualidades. "
+        "Es responsabilidad del pasajero contar con pasaporte vigente, así como visados, vacunas y requisitos necesarios para realizar su viaje."
     )
     pdf.multi_cell(0, 5, disclaimer)
     
@@ -252,3 +253,4 @@ if submitted:
     else:
 
         st.warning("⚠️ Por favor ingresa el nombre del titular y selecciona al menos un servicio.")
+
