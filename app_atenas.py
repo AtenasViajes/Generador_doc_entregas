@@ -13,6 +13,9 @@ class AtenasPDF(FPDF):
 
 def generar_pdf(nombre_cliente, items_seleccionados, fecha):
     pdf = AtenasPDF()
+    
+    # EL TRUCO: Margen de seguridad de 40mm abajo para no pisar el diseño
+    pdf.set_auto_page_break(auto=True, margin=40)
     pdf.add_page()
     
     # Titulo en Azul Oscuro
@@ -26,7 +29,7 @@ def generar_pdf(nombre_cliente, items_seleccionados, fecha):
     pdf.set_font('Helvetica', '', 11)
     pdf.cell(0, 7, f'Fecha: {fecha}', ln=True)
     pdf.cell(0, 7, f'Titular de la reserva: {nombre_cliente}', ln=True)
-    pdf.ln(10)
+    pdf.ln(8) # Redujimos el espacio aquí
     
     # Lista Dinamica
     pdf.set_font('Helvetica', 'B', 11)
@@ -34,11 +37,11 @@ def generar_pdf(nombre_cliente, items_seleccionados, fecha):
     pdf.set_font('Helvetica', '', 11)
     
     for item in items_seleccionados:
-        pdf.cell(10, 8, '-', align='C')
-        pdf.cell(0, 8, item, ln=True)
+        pdf.cell(10, 6, '-', align='C') # Redujimos el alto del renglón de 8 a 6
+        pdf.cell(0, 6, item, ln=True)
     
-    # Disclaimer Legal
-    pdf.ln(15)
+    # Disclaimer Legal (Con tu actualización de pasaportes y visados)
+    pdf.ln(10) # Redujimos el espacio antes del texto legal
     pdf.set_font('Helvetica', 'I', 9)
     disclaimer = (
         "Declaracion de Conformidad: Hago constar que he recibido la documentacion detallada anteriormente. "
@@ -46,12 +49,12 @@ def generar_pdf(nombre_cliente, items_seleccionados, fecha):
         "puede estar sujeto a modificaciones por causas ajenas a la agencia Atenas, tales como condiciones climaticas, "
         "disposiciones gubernamentales, retrasos operativos de transportistas o situaciones de fuerza mayor. "
         "Acepto los terminos de servicio y la gestion de la agencia ante dichas eventualidades. "
-        "Es responsabilidad del pasajero contar con pasaporte vigente, así como visados, vacunas y requisitos necesarios para realizar su viaje."
+        "Es responsabilidad del pasajero contar con pasaporte vigente, asi como visados, vacunas y requisitos necesarios para realizar su viaje."
     )
     pdf.multi_cell(0, 5, disclaimer)
     
     # Firma centrada
-    pdf.ln(25)
+    pdf.ln(15) # Redujimos este salto para que no empuje tanto hacia abajo
     pdf.set_font('Helvetica', 'B', 11)
     pdf.cell(0, 10, '________________________________________', ln=True, align='C')
     pdf.cell(0, 5, 'Nombre y firma del cliente', ln=True, align='C')
@@ -253,4 +256,5 @@ if submitted:
     else:
 
         st.warning("⚠️ Por favor ingresa el nombre del titular y selecciona al menos un servicio.")
+
 
